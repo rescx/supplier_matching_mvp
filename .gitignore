@@ -1,0 +1,13 @@
+__pycache__/
+.python-version
+.venv/
+env/
+node_modules/
+frontend/node_modules/
+*.db
+*.sqlite
+dist/
+frontend/dist/
+*.pyc
+.DS_Store
+*.log
