@@ -13,7 +13,7 @@ services:
   frontend:
     build: ./frontend
     environment:
-      - VITE_API_URL=http://backend:8000
+      - VITE_API_URL=${VITE_API_URL:-http://backend:8000}
     ports:
       - "5173:4173"
     depends_on:
