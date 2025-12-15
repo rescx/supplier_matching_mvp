@@ -1,12 +1,16 @@
-FROM node:18-alpine
+FROM node:18-alpine AS build
 
 WORKDIR /app
-
 COPY package.json package-lock.json* ./
-RUN npm install --quiet || yarn install --frozen-lockfile
+RUN npm ci
 
 COPY . .
+RUN npm run build
 
-EXPOSE 5173
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=build /app/dist ./dist
+RUN npm install -g serve
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0", "--port", "5173"]
+EXPOSE 4173
+CMD ["serve", "-s", "dist", "-l", "4173"]
