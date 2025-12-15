@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 from datetime import datetime
 from enum import Enum
-from typing import Optional
+from typing import Optional, List
 
 from sqlmodel import SQLModel, Field, Relationship, UniqueConstraint
 
@@ -38,7 +36,7 @@ class PriceSupplierGroup(SQLModel, table=True):
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-    mappings: list["SupplierMapping"] = Relationship(back_populates="group")
+    mappings: List["SupplierMapping"] = Relationship(back_populates="group")
 
 
 class Supplier(SQLModel, table=True):
@@ -53,7 +51,7 @@ class Supplier(SQLModel, table=True):
     branch: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.utcnow)
 
-    mappings: list["SupplierMapping"] = Relationship(back_populates="canonical_supplier")
+    mappings: List["SupplierMapping"] = Relationship(back_populates="canonical_supplier")
 
 
 class SupplierMapping(SQLModel, table=True):
